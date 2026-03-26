@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Painel | CWB Clinical Research</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "secondary-container": "#34BDEE",
+          "background": "#fcfaf6",
+          "outline-variant": "#c3c6cf",
+          "surface-container-high": "#eae8e4",
+          "outline": "#73777f",
+          "surface": "#fcfaf6",
+          "on-primary-fixed-variant": "#e0f4ff",
+          "tertiary-container": "#003b4e",
+          "on-primary": "#ffffff",
+          "on-background": "#1b1c1a",
+          "surface-variant": "#e4e2de",
+          "on-surface": "#1b1c1a",
+          "on-primary-container": "#c5ecff",
+          "primary-container": "#2F2190",
+          "surface-container": "#efeeea",
+          "surface-container-highest": "#e4e2de",
+          "surface-tint": "#3B6EA3",
+          "on-secondary": "#ffffff",
+          "surface-container-low": "#f5f3ef",
+          "primary": "#0E385E",
+          "on-surface-variant": "#43474e",
+          "surface-container-lowest": "#ffffff",
+          "secondary": "#3B6EA3"
+        },
+        fontFamily: {
+          "headline": ["Manrope", "sans-serif"],
+          "body": ["Inter", "sans-serif"],
+          "label": ["Inter", "sans-serif"],
+        },
+        borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+      },
+    },
+  }
+</script>
+<style>
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  vertical-align: middle;
+}
+body { font-family: "Inter", sans-serif; }
+h1, h2, h3, h4 { font-family: "Manrope", sans-serif; }
+.clinical-pattern {
+  background-image: url(../assets/marca/Pattern-principal.png);
+  background-repeat: repeat;
+  background-size: 280px;
+}
+</style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-secondary-container min-h-screen flex flex-col">
+
+<!-- Header do painel -->
+<header class="sticky top-0 z-50 bg-surface/90 backdrop-blur-md shadow-sm border-b border-outline-variant/20">
+  <div class="max-w-7xl mx-auto px-6 md:px-8">
+    <div class="flex justify-between items-center py-3.5">
+      <a href="../index.html">
+        <img src="../assets/marca/Logo-horizontal-transparente-colorida.png"
+             alt="CWB Clinical Research"
+             class="h-[38px]"/>
+      </a>
+      <div class="flex items-center gap-4">
+        <span id="user-email" class="hidden md:block text-sm text-on-surface-variant"></span>
+        <button
+          id="signout-btn"
+          class="inline-flex items-center gap-1.5 text-sm font-medium text-on-surface-variant hover:text-primary transition-colors px-3 py-1.5 rounded-lg hover:bg-primary/5"
+          style="font-family:'Manrope',sans-serif"
+        >
+          <span class="material-symbols-outlined text-base">logout</span>
+          Sair
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="flex-1 max-w-7xl mx-auto w-full px-6 md:px-8 py-10">
+
+  <!-- Título da página -->
+  <div class="mb-8">
+    <h1 class="text-2xl font-bold text-primary" style="font-family:'Manrope',sans-serif">Painel — Voluntários</h1>
+    <p class="text-sm text-on-surface-variant mt-1">Gerenciamento de cadastros de pacientes voluntários</p>
+  </div>
+
+  <!-- Cards de resumo (placeholders) -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
+    <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/15 shadow-sm p-6">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings:'FILL' 1;">group</span>
+        <span class="text-sm font-semibold text-on-surface-variant uppercase tracking-wide">Total cadastrado</span>
+      </div>
+      <p class="text-3xl font-bold text-primary" style="font-family:'Manrope',sans-serif" id="stat-total">—</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/15 shadow-sm p-6">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings:'FILL' 1;">pending</span>
+        <span class="text-sm font-semibold text-on-surface-variant uppercase tracking-wide">Aguardando triagem</span>
+      </div>
+      <p class="text-3xl font-bold text-primary" style="font-family:'Manrope',sans-serif" id="stat-pending">—</p>
+    </div>
+    <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/15 shadow-sm p-6">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings:'FILL' 1;">check_circle</span>
+        <span class="text-sm font-semibold text-on-surface-variant uppercase tracking-wide">Aprovados</span>
+      </div>
+      <p class="text-3xl font-bold text-primary" style="font-family:'Manrope',sans-serif" id="stat-approved">—</p>
+    </div>
+  </div>
+
+  <!-- Banner informativo / tabela placeholder -->
+  <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/15 shadow-sm overflow-hidden">
+    <!-- Cabeçalho da seção -->
+    <div class="px-6 py-4 border-b border-outline-variant/15 flex items-center justify-between">
+      <h2 class="font-semibold text-on-surface text-sm" style="font-family:'Manrope',sans-serif">
+        Lista de voluntários cadastrados
+      </h2>
+      <span class="text-xs font-medium text-on-surface-variant/60 bg-surface-container px-3 py-1 rounded-full">
+        Em configuração
+      </span>
+    </div>
+
+    <!-- Estado vazio / informativo -->
+    <div class="flex flex-col items-center justify-center py-20 px-6 text-center">
+      <div class="w-16 h-16 rounded-full bg-primary/8 flex items-center justify-center mb-5">
+        <span class="material-symbols-outlined text-3xl text-primary/50" style="font-variation-settings:'FILL' 1;">assignment</span>
+      </div>
+      <h3 class="text-base font-semibold text-on-surface mb-2" style="font-family:'Manrope',sans-serif">
+        Dados de voluntários em breve
+      </h3>
+      <p class="text-sm text-on-surface-variant max-w-sm leading-relaxed">
+        Quando a página <strong>Voluntarie-se</strong> estiver ativa, os cadastros dos pacientes aparecerão aqui automaticamente.
+      </p>
+      <div class="mt-6 flex items-center gap-2 text-xs text-on-surface-variant/50 bg-surface-container px-4 py-2.5 rounded-xl">
+        <span class="material-symbols-outlined text-sm">info</span>
+        Integração com Supabase configurada e pronta
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Supabase JS via CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // ─────────────────────────────────────────────
+  // CONFIGURAÇÃO SUPABASE
+  // Deve ser idêntica à do index.html (login)
+  // ─────────────────────────────────────────────
+  const SUPABASE_URL      = 'https://bopaymmsxkvkgjoeqilf.supabase.co'
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJvcGF5bW1zeGt2a2dqb2VxaWxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NTIwOTksImV4cCI6MjA5MDEyODA5OX0.t9WkfB4eqJlhWGiXgbxov22GedpdMs6s-kFKJ9KHznw'
+
+  const { createClient } = supabase
+  const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+  // Proteção de rota: redireciona para login se não autenticado
+  ;(async () => {
+    const { data: { session } } = await sb.auth.getSession()
+    if (!session) {
+      window.location.href = './index.html'
+      return
+    }
+    // Exibe e-mail do usuário logado
+    const emailEl = document.getElementById('user-email')
+    if (emailEl) emailEl.textContent = session.user.email
+  })()
+
+  // Botão de logout
+  document.getElementById('signout-btn').addEventListener('click', async () => {
+    await sb.auth.signOut()
+    window.location.href = './index.html'
+  })
+</script>
+
+</body>
+</html>
